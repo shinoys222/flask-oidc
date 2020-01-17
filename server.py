@@ -20,6 +20,7 @@ def home():
                 <div>Hello, {email}</dic>
                 <ul>
                     <li><a href="/flask-oidc/profile/">Profile</a></li>
+                    <li><a href="/flask-oidc/token/">complete_token</a></li>
                     <li><a href="/flask-oidc/token_info/">token_info</a></li>
                     <li><a href="/flask-oidc/role_protected/token_info/">role_token_info</a></li>
                     <li><a href="/flask-oidc/logout/">Log out</a></li>
@@ -56,6 +57,18 @@ def profile():
             <div>
                 <a href="/flask-oidc/logout/">Log out</a>
                 <div>Profile: {info}</dic>
+            </div>
+        """
+
+
+@app.route("/flask-oidc/token/")
+@oidc.require_login
+def token():
+    info = g.oidc_id_token
+    return f"""
+            <div>
+                <a href="/flask-oidc/logout/">Log out</a>
+                <div>Complete Token: {info}</dic>
             </div>
         """
 
